@@ -8,29 +8,49 @@
 
 import UIKit
 import GoogleMaps
-class ViewController: UIViewController {
+
+class ViewController: UIViewController, HolderViewDelegate {
+    
+    var holderView = HolderView(frame:CGRectZero)
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        addHolderView()
+
+        transition()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         //        let mapView = self.view as! GMSMapView
-        var camera = GMSCameraPosition.cameraWithLatitude(-33.86, longitude: 151.20, zoom: 10)
-        var mapView = GMSMapView.mapWithFrame(CGRectZero, camera: camera)
-        mapView.myLocationEnabled = true
-        self.view = mapView
-        
-        var marker = GMSMarker()
-        marker.position = CLLocationCoordinate2DMake(-33.86, 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
-        marker.map = mapView
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func addHolderView() {
+        let boxSize: CGFloat = 100.0
+        holderView.frame = CGRect(x: view.bounds.width / 2 - boxSize / 2,
+            y: view.bounds.height / 2 - boxSize / 2,
+            width: boxSize,
+            height: boxSize)
+        holderView.parentFrame = view.frame
+        holderView.delegate = self
+        view.addSubview(holderView)
+        holderView.addOval()
+        
+        
+    }
 
-
+    func backgroundLabel() {
+    }
+    
+    func transition(){
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let secondViewController = storyBoard.instantiateViewControllerWithIdentifier("MapViewController") as MapViewController
+        self.presentViewController(MapViewController, animated: true, completion: nil)
+    }
 }
-
