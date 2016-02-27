@@ -116,9 +116,18 @@ class HolderView: UIView {
             self.frame = self.parentFrame
             imageView.frame = self.parentFrame
             }, completion: { finished in
-                self.finishexpanding()
+                 self.finishexpanding()
+             //   self.finishexpanding()
         })
+        
+       // NSTimer.scheduledTimerWithTimeInterval(1.50, target: self, selector: "transToMap",
+       //     userInfo: nil, repeats: false)
     }
+    
+    //func transToMap(){
+    //    let toNextController = ViewController()
+    //    toNextController.transition()
+    //}
     
     
 }

@@ -16,8 +16,9 @@ class ViewController: UIViewController, HolderViewDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         addHolderView()
-
-        transition()
+        
+        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "transition",
+            userInfo: nil, repeats: false)
     }
 
     override func viewDidLoad() {
@@ -42,14 +43,14 @@ class ViewController: UIViewController, HolderViewDelegate {
         view.addSubview(holderView)
         holderView.addOval()
         
-        
+        //transition()
     }
 
     func backgroundLabel() {
     }
     
     func transition(){
-        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        //let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         //let secondViewController = storyBoard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
         let vc = MapViewController()
         self.presentViewController(vc, animated: true, completion: nil)
