@@ -50,7 +50,8 @@ class ViewController: UIViewController, HolderViewDelegate {
     
     func transition(){
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let secondViewController = storyBoard.instantiateViewControllerWithIdentifier("MapViewController") as MapViewController
-        self.presentViewController(MapViewController, animated: true, completion: nil)
+        //let secondViewController = storyBoard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
+        let vc = MapViewController()
+        self.presentViewController(vc, animated: true, completion: nil)
     }
 }
