@@ -16,6 +16,12 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PI0-4u-rZx">
+                                <rect key="frame" x="172" y="396" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
@@ -29,7 +35,7 @@
         <!--Map View Controller-->
         <scene sceneID="pds-U2-UqF">
             <objects>
-                <viewController id="VVA-zm-dgv" customClass="MapViewController" customModule="WhereUAt" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="VVA-zm-dgv" customClass="MapViewController" customModule="WhereUAt" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7UK-ZF-D9X"/>
                         <viewControllerLayoutGuide type="bottom" id="Ph5-gK-La7"/>

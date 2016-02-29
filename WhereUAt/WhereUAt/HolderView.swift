@@ -41,12 +41,6 @@ class HolderView: UIView {
     
     func wobbleOval() {
         ovalLayer.wobble()
-        // 1
-        //    layer.addSublayer(triangleLayer) // Add this line
-        ovalLayer.wobble()
-        
-        // 2
-        // Add the code below
         NSTimer.scheduledTimerWithTimeInterval(0.9, target: self,
             selector: "drawAnimatedTriangle", userInfo: nil,
             repeats: false)

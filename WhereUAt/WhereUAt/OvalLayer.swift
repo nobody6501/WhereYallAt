@@ -23,6 +23,13 @@ class OvalLayer: CAShapeLayer {
     }
     
     var ovalPathSmall: UIBezierPath {
+        //let imageName = "at-sign.png"
+        //let image = UIImage(named: imageName)
+        //let imageView = UIImageView(image: image!)
+        //imageView.frame = CGRect(x: 50.0, y: 50.0, width: 0.0, height: 0.0)
+        
+        //return UIBezierPath(imageView: CGRect(x: 50.0, y: 50.0, width: 0.0, height: 0.0))
+        //return UIBezierPath(image: CGRect(x: 50.0, y: 50.0, width: 0.0, height: 0.0))
         return UIBezierPath(ovalInRect: CGRect(x: 50.0, y: 50.0, width: 0.0, height: 0.0))
     }
     
@@ -49,35 +56,30 @@ class OvalLayer: CAShapeLayer {
     }
     
     func wobble() {
-        // 1
         let wobbleAnimation1: CABasicAnimation = CABasicAnimation(keyPath: "path")
         wobbleAnimation1.fromValue = ovalPathLarge.CGPath
         wobbleAnimation1.toValue = ovalPathSquishVertical.CGPath
         wobbleAnimation1.beginTime = 0.0
         wobbleAnimation1.duration = animationDuration
         
-        // 2
         let wobbleAnimation2: CABasicAnimation = CABasicAnimation(keyPath: "path")
         wobbleAnimation2.fromValue = ovalPathSquishVertical.CGPath
         wobbleAnimation2.toValue = ovalPathSquishHorizontal.CGPath
         wobbleAnimation2.beginTime = wobbleAnimation1.beginTime + wobbleAnimation1.duration
         wobbleAnimation2.duration = animationDuration
         
-        // 3
         let wobbleAnimation3: CABasicAnimation = CABasicAnimation(keyPath: "path")
         wobbleAnimation3.fromValue = ovalPathSquishHorizontal.CGPath
         wobbleAnimation3.toValue = ovalPathSquishVertical.CGPath
         wobbleAnimation3.beginTime = wobbleAnimation2.beginTime + wobbleAnimation2.duration
         wobbleAnimation3.duration = animationDuration
         
-        // 4
         let wobbleAnimation4: CABasicAnimation = CABasicAnimation(keyPath: "path")
         wobbleAnimation4.fromValue = ovalPathSquishVertical.CGPath
         wobbleAnimation4.toValue = ovalPathLarge.CGPath
         wobbleAnimation4.beginTime = wobbleAnimation3.beginTime + wobbleAnimation3.duration
         wobbleAnimation4.duration = animationDuration
         
-        // 5
         let wobbleAnimationGroup: CAAnimationGroup = CAAnimationGroup()
         wobbleAnimationGroup.animations = [wobbleAnimation1, wobbleAnimation2, wobbleAnimation3,
             wobbleAnimation4]
