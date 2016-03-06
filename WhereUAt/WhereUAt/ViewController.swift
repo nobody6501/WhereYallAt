@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import GoogleMaps
+//import CoreLocation
+//import GoogleMaps
 
-class ViewController: UIViewController, HolderViewDelegate, CLLocationManagerDelegate {
-    var locationManager = CLLocationManager()
-    var didFindMyLocation = false
-    
-    @IBOutlet weak var viewMap: GMSMapView!
+class ViewController: UIViewController, HolderViewDelegate {
+//    var locationManager = CLLocationManager()
+//    var didFindMyLocation = false
     
     var holderView = HolderView(frame:CGRectZero)
     
@@ -27,14 +26,11 @@ class ViewController: UIViewController, HolderViewDelegate, CLLocationManagerDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
         
-        let camera: GMSCameraPosition = GMSCameraPosition.cameraWithLatitude(48.857165, longitude: 2.354613, zoom: 8.0)
-        viewMap.camera = camera
-        // Do any additional setup after loading the view, typically from a nib.
-        //        let mapView = self.view as! GMSMapView
-        viewMap.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
+//        locationManager.delegate = self
+//        locationManager.requestWhenInUseAuthorization()
+        
+        
     }
     
 //    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [String : AnyObject], context: UnsafeMutablePointer<Void>) {

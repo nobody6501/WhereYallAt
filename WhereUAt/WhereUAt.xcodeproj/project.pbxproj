@@ -19,11 +19,9 @@
 		29C9922E1C7FC40E009A5875 /* TriangleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C9922A1C7FC40E009A5875 /* TriangleLayer.swift */; };
 		29C992321C7FC440009A5875 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C992311C7FC440009A5875 /* Colors.swift */; };
 		29C992341C7FC933009A5875 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C992331C7FC933009A5875 /* MapViewController.swift */; };
-		981C4E41C341EA323AC0ADCF /* libPods-WhereUAt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BCE0F06C4468281B90BA5D4C /* libPods-WhereUAt.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1B872254887E2164F286703E /* Pods-WhereUAt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhereUAt.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhereUAt/Pods-WhereUAt.release.xcconfig"; sourceTree = "<group>"; };
 		29C9920E1C7FBE44009A5875 /* WhereUAt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereUAt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29C992111C7FBE44009A5875 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29C992131C7FBE44009A5875 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,8 +36,6 @@
 		29C9922A1C7FC40E009A5875 /* TriangleLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleLayer.swift; sourceTree = "<group>"; };
 		29C992311C7FC440009A5875 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		29C992331C7FC933009A5875 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		66F6B1ED97594162441E0951 /* Pods-WhereUAt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhereUAt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhereUAt/Pods-WhereUAt.debug.xcconfig"; sourceTree = "<group>"; };
-		BCE0F06C4468281B90BA5D4C /* libPods-WhereUAt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WhereUAt.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,7 +43,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				981C4E41C341EA323AC0ADCF /* libPods-WhereUAt.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,7 +54,6 @@
 			children = (
 				29C992101C7FBE44009A5875 /* WhereUAt */,
 				29C9920F1C7FBE44009A5875 /* Products */,
-				A7D417108DB5B8B511D21A90 /* Pods */,
 				DAFA9DBA720955D19D85A5D7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -80,10 +74,10 @@
 				29C992111C7FBE44009A5875 /* AppDelegate.swift */,
 				29C992131C7FBE44009A5875 /* ViewController.swift */,
 				29C992151C7FBE44009A5875 /* Main.storyboard */,
+				29C992331C7FC933009A5875 /* MapViewController.swift */,
 				29C992181C7FBE44009A5875 /* Assets.xcassets */,
 				29C9921A1C7FBE44009A5875 /* LaunchScreen.storyboard */,
 				29C9921D1C7FBE44009A5875 /* Info.plist */,
-				29C992331C7FC933009A5875 /* MapViewController.swift */,
 			);
 			path = WhereUAt;
 			sourceTree = "<group>";
@@ -116,19 +110,9 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
-		A7D417108DB5B8B511D21A90 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				66F6B1ED97594162441E0951 /* Pods-WhereUAt.debug.xcconfig */,
-				1B872254887E2164F286703E /* Pods-WhereUAt.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		DAFA9DBA720955D19D85A5D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BCE0F06C4468281B90BA5D4C /* libPods-WhereUAt.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -140,12 +124,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 29C992201C7FBE44009A5875 /* Build configuration list for PBXNativeTarget "WhereUAt" */;
 			buildPhases = (
-				2884E51BD3E026094B90A370 /* Check Pods Manifest.lock */,
 				29C9920A1C7FBE44009A5875 /* Sources */,
 				29C9920B1C7FBE44009A5875 /* Frameworks */,
 				29C9920C1C7FBE44009A5875 /* Resources */,
-				B60A56FC8EF1D9A31F4DB9A7 /* Embed Pods Frameworks */,
-				438578C3A39258DEE0358BAB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -202,54 +183,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2884E51BD3E026094B90A370 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		438578C3A39258DEE0358BAB /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WhereUAt/Pods-WhereUAt-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B60A56FC8EF1D9A31F4DB9A7 /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WhereUAt/Pods-WhereUAt-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		29C9920A1C7FBE44009A5875 /* Sources */ = {
@@ -373,7 +306,6 @@
 		};
 		29C992211C7FBE44009A5875 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 66F6B1ED97594162441E0951 /* Pods-WhereUAt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -388,7 +320,6 @@
 		};
 		29C992221C7FBE44009A5875 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B872254887E2164F286703E /* Pods-WhereUAt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
