@@ -19,9 +19,13 @@
 		29C9922E1C7FC40E009A5875 /* TriangleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C9922A1C7FC40E009A5875 /* TriangleLayer.swift */; };
 		29C992321C7FC440009A5875 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C992311C7FC440009A5875 /* Colors.swift */; };
 		29C992341C7FC933009A5875 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C992331C7FC933009A5875 /* MapViewController.swift */; };
+		83FBD7941C9086760043F043 /* SaveFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBD7931C9086760043F043 /* SaveFirebase.swift */; };
+		BFA5344EE05DBBC0183CD003 /* Pods_WhereUAt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1049E5B9D4E698523D48F870 /* Pods_WhereUAt.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10337723BC5FE41206E02EAA /* Pods-WhereUAt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhereUAt.release.xcconfig"; path = "Pods/Target Support Files/Pods-WhereUAt/Pods-WhereUAt.release.xcconfig"; sourceTree = "<group>"; };
+		1049E5B9D4E698523D48F870 /* Pods_WhereUAt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WhereUAt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		29C9920E1C7FBE44009A5875 /* WhereUAt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereUAt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29C992111C7FBE44009A5875 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		29C992131C7FBE44009A5875 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +40,8 @@
 		29C9922A1C7FC40E009A5875 /* TriangleLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleLayer.swift; sourceTree = "<group>"; };
 		29C992311C7FC440009A5875 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		29C992331C7FC933009A5875 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		83FBD7931C9086760043F043 /* SaveFirebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveFirebase.swift; sourceTree = "<group>"; };
+		917BCC47A70A381AE8DAF944 /* Pods-WhereUAt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhereUAt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhereUAt/Pods-WhereUAt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BFA5344EE05DBBC0183CD003 /* Pods_WhereUAt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +62,7 @@
 				29C992101C7FBE44009A5875 /* WhereUAt */,
 				29C9920F1C7FBE44009A5875 /* Products */,
 				DAFA9DBA720955D19D85A5D7 /* Frameworks */,
+				4579B96AD4EAAA6A7E4470F8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,8 +77,9 @@
 		29C992101C7FBE44009A5875 /* WhereUAt */ = {
 			isa = PBXGroup;
 			children = (
+				83FBD7921C90859F0043F043 /* Data */,
 				29C992301C7FC42D009A5875 /* Utilities */,
-				29C992231C7FC3AF009A5875 /* Loder View */,
+				29C992231C7FC3AF009A5875 /* View */,
 				29C992111C7FBE44009A5875 /* AppDelegate.swift */,
 				29C992131C7FBE44009A5875 /* ViewController.swift */,
 				29C992151C7FBE44009A5875 /* Main.storyboard */,
@@ -82,13 +91,13 @@
 			path = WhereUAt;
 			sourceTree = "<group>";
 		};
-		29C992231C7FC3AF009A5875 /* Loder View */ = {
+		29C992231C7FC3AF009A5875 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				29C992261C7FC3E5009A5875 /* Layers */,
 				29C992241C7FC3CF009A5875 /* HolderView.swift */,
 			);
-			name = "Loder View";
+			name = View;
 			sourceTree = "<group>";
 		};
 		29C992261C7FC3E5009A5875 /* Layers */ = {
@@ -110,9 +119,27 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
+		4579B96AD4EAAA6A7E4470F8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				917BCC47A70A381AE8DAF944 /* Pods-WhereUAt.debug.xcconfig */,
+				10337723BC5FE41206E02EAA /* Pods-WhereUAt.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		83FBD7921C90859F0043F043 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				83FBD7931C9086760043F043 /* SaveFirebase.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		DAFA9DBA720955D19D85A5D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1049E5B9D4E698523D48F870 /* Pods_WhereUAt.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -124,9 +151,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 29C992201C7FBE44009A5875 /* Build configuration list for PBXNativeTarget "WhereUAt" */;
 			buildPhases = (
+				D95E3A3B8DF3835C20CCF506 /* Check Pods Manifest.lock */,
 				29C9920A1C7FBE44009A5875 /* Sources */,
 				29C9920B1C7FBE44009A5875 /* Frameworks */,
 				29C9920C1C7FBE44009A5875 /* Resources */,
+				BCB519B517C71468DB6F3516 /* Embed Pods Frameworks */,
+				179BA806B8D5BF10910BFD04 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -184,6 +214,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		179BA806B8D5BF10910BFD04 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WhereUAt/Pods-WhereUAt-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BCB519B517C71468DB6F3516 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-WhereUAt/Pods-WhereUAt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D95E3A3B8DF3835C20CCF506 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		29C9920A1C7FBE44009A5875 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -192,6 +270,7 @@
 				29C9922C1C7FC40E009A5875 /* OvalLayer.swift in Sources */,
 				29C992321C7FC440009A5875 /* Colors.swift in Sources */,
 				29C9922B1C7FC40E009A5875 /* ArcLayer.swift in Sources */,
+				83FBD7941C9086760043F043 /* SaveFirebase.swift in Sources */,
 				29C992251C7FC3CF009A5875 /* HolderView.swift in Sources */,
 				29C992341C7FC933009A5875 /* MapViewController.swift in Sources */,
 				29C992141C7FBE44009A5875 /* ViewController.swift in Sources */,
@@ -306,10 +385,16 @@
 		};
 		29C992211C7FBE44009A5875 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 917BCC47A70A381AE8DAF944 /* Pods-WhereUAt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"/Users/martinhuang/Desktop/WhereUAt/WhereUAt/Pods/**",
+					"$(SRCROOT)/**",
+				);
 				INFOPLIST_FILE = WhereUAt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WhereUAt.WhereUAt;
@@ -320,10 +405,16 @@
 		};
 		29C992221C7FBE44009A5875 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10337723BC5FE41206E02EAA /* Pods-WhereUAt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"/Users/martinhuang/Desktop/WhereUAt/WhereUAt/Pods/**",
+					"$(SRCROOT)/**",
+				);
 				INFOPLIST_FILE = WhereUAt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WhereUAt.WhereUAt;
