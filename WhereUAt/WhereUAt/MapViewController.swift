@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Firebase
+import GeoFire
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -16,8 +18,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     
+    var root: Firebase?
+    var geofire: GeoFire?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
+        let locationRoot = root.childByAppendingPath("locations").childByAutoId()
+        let key = locationRoot.key
+        
+        var longitude = locationManager.location?.coordinate.longitude
+        var latitude = locationManager.location?.coordinate.latitude
+        
+//        var updateCurrentLocation = ["locations/\(key)":true,"\(key)":["longitude": longitude, "latitude": latitude]]
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -26,6 +41,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -34,6 +51,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
+        
         let location = locations.last
         
         let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
@@ -41,8 +59,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05))
         
         self.mapView.setRegion(region, animated: true)
-        
         self.locationManager.stopUpdatingLocation()
+        
+        
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError)

@@ -12,10 +12,10 @@ import Firebase
 
 class SaveFirebase {
     
-    let root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
     
     func setupFirebase () {
-        
+        let root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
+
         
     }
     
