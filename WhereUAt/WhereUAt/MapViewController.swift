@@ -24,12 +24,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
-        let locationRoot = root.childByAppendingPath("locations").childByAutoId()
-        let key = locationRoot.key
-        
-        var longitude = locationManager.location?.coordinate.longitude
-        var latitude = locationManager.location?.coordinate.latitude
+        root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
+//        let key = locationRoot.key
         
 //        var updateCurrentLocation = ["locations/\(key)":true,"\(key)":["longitude": longitude, "latitude": latitude]]
         
@@ -60,6 +56,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         self.mapView.setRegion(region, animated: true)
         self.locationManager.stopUpdatingLocation()
+        
+        
+        var longitude = location!.coordinate.longitude
+        var latitude = location!.coordinate.latitude
+        
+        var coordinates : [String:CLLocationDegrees] = [
+            "longitude": longitude,
+            "latitude": latitude
+        ]
+        
+        let locationRoot = root!.childByAppendingPath("locations").childByAutoId()
+
+        locationRoot.setValue(coordinates)
         
         
     }
