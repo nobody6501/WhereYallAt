@@ -12,7 +12,7 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.5668658519581784" green="0.80561058465461988" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.37480727159999999" green="0.55823761930000004" blue="0.88239182689999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="hfA-Zb-0cX"/>
@@ -46,5 +46,20 @@
             </objects>
             <point key="canvasLocation" x="-3830" y="-67"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="c7E-hy-I1N">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="cEV-Re-Ouc" customClass="LoginViewController" customModule="WhereUAt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a2L-EY-o7d">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.37480727159999999" green="0.55823761930000004" blue="0.88239182689999995" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Jc-DV-7Ro" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3478" y="-82"/>
+        </scene>
     </scenes>
+    <color key="tintColor" red="0.37480727157769111" green="0.5582376193472085" blue="0.88239182692307694" alpha="1" colorSpace="calibratedRGB"/>
 </document>

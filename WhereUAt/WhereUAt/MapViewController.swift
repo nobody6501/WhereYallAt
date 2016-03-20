@@ -10,24 +10,24 @@ import UIKit
 import MapKit
 import CoreLocation
 import Firebase
-import GeoFire
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     
     let locationManager = CLLocationManager()
+    let facebookLogin = FBSDKLoginManager()
     
     var root: Firebase?
-    var geofire: GeoFire?
+//    var geofire: GeoFire?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
-//        let key = locationRoot.key
+        let userRoot = root!.childByAppendingPath("user").childByAutoId()
         
-//        var updateCurrentLocation = ["locations/\(key)":true,"\(key)":["longitude": longitude, "latitude": latitude]]
         
     }
     
@@ -37,8 +37,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -57,10 +55,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.setRegion(region, animated: true)
         self.locationManager.stopUpdatingLocation()
         
-        
         var longitude = location!.coordinate.longitude
         var latitude = location!.coordinate.latitude
-        
         var coordinates : [String:CLLocationDegrees] = [
             "longitude": longitude,
             "latitude": latitude
