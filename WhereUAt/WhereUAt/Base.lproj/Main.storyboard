@@ -53,8 +53,21 @@
                     <view key="view" contentMode="scaleToFill" id="a2L-EY-o7d">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ncE-u6-0bj" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="72" y="369" width="187" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="0.37480727159999999" green="0.55823761930000004" blue="0.88239182689999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <connections>
+                        <outlet property="loginButton" destination="ncE-u6-0bj" id="Akl-Sx-knh"/>
+                        <segue destination="fOS-Tc-hIw" kind="modal" identifier="toMap" id="BcM-m9-ZNv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Jc-DV-7Ro" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
