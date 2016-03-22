@@ -19,6 +19,16 @@ class ViewController: UIViewController, HolderViewDelegate {
         
         NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "transition",
             userInfo: nil, repeats: false)
+        /* Adding static image of logo to center of navigation bar
+        let nav = self.navigationController?.navigationBar
+        
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        imageView.contentMode = .ScaleAspectFit
+        
+        let image = UIImage(named: "AppIconNoBGLarge")
+        imageView.image = image
+        
+        navigationItem.titleView = imageView*/
     }
 
     override func viewDidLoad() {
