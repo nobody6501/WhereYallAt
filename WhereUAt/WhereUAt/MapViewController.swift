@@ -74,5 +74,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         print("Errors: " + error.localizedDescription)
     }
     
+    @IBAction func LogoutButton(sender: AnyObject)
+    {
+        let loginManager = FBSDKLoginManager()
+        loginManager.logOut()
+        
+        let loginPage = self.storyboard?.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+        let loginNav = UINavigationController(rootViewController: loginPage)
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appDelegate.window?.rootViewController = loginNav
+        
+    }
+    
+    
 }
 
