@@ -25,7 +25,6 @@ class ViewController: UIViewController, HolderViewDelegate {
             NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "toMapViewTransition",
                 userInfo: nil, repeats: false)
         }
-
     }
 
     override func viewDidLoad() {

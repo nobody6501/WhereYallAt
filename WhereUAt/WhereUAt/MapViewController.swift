@@ -12,6 +12,8 @@ import CoreLocation
 import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
+import FBSDKShareKit
+
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -28,6 +30,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
         let userRoot = root!.childByAppendingPath("user").childByAutoId()
         
+        
+        //only friends using app is fetched
+        var fbRequest = FBSDKGraphRequest(graphPath:"/me/friends", parameters: nil);
+        fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+            if error == nil {
+                
+                let data = result["data"]
+                for anItem in (data as! [Dictionary<String, AnyObject>]) {
+                    let personName = anItem["name"] as! String
+                    let personID = anItem["id"] as! String
+                    // do something with personName and personID
+                    print("Friends ID are: \(personID)")
+                }
+                print("Friends are : \(result)")
+            } else {
+                print("Error Getting Friends \(error)");
+            }
+        }
         
     }
     
