@@ -25,7 +25,8 @@
 		8321B0701C9116E900CE42F7 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8321B06F1C9116E900CE42F7 /* libc++.tbd */; };
 		8321B0721C9116F300CE42F7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8321B0711C9116F300CE42F7 /* Security.framework */; };
 		8321B0741C9116FB00CE42F7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8321B0731C9116FB00CE42F7 /* MapKit.framework */; };
-		83FBD7941C9086760043F043 /* SaveFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FBD7931C9086760043F043 /* SaveFirebase.swift */; };
+		8321B2C01C9DFA5F00CE42F7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8321B2BF1C9DFA5F00CE42F7 /* LoginViewController.swift */; };
+		8321B2C21C9E53DD00CE42F7 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8321B2C11C9E53DD00CE42F7 /* BaseService.swift */; };
 		BFA5344EE05DBBC0183CD003 /* Pods_WhereUAt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1049E5B9D4E698523D48F870 /* Pods_WhereUAt.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,7 +54,8 @@
 		8321B06F1C9116E900CE42F7 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		8321B0711C9116F300CE42F7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		8321B0731C9116FB00CE42F7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		83FBD7931C9086760043F043 /* SaveFirebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveFirebase.swift; sourceTree = "<group>"; };
+		8321B2BF1C9DFA5F00CE42F7 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		8321B2C11C9E53DD00CE42F7 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		917BCC47A70A381AE8DAF944 /* Pods-WhereUAt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WhereUAt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WhereUAt/Pods-WhereUAt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				29C992111C7FBE44009A5875 /* AppDelegate.swift */,
 				29C992131C7FBE44009A5875 /* ViewController.swift */,
 				29C992151C7FBE44009A5875 /* Main.storyboard */,
+				8321B2BF1C9DFA5F00CE42F7 /* LoginViewController.swift */,
 				29C992331C7FC933009A5875 /* MapViewController.swift */,
 				29C992181C7FBE44009A5875 /* Assets.xcassets */,
 				29C9921A1C7FBE44009A5875 /* LaunchScreen.storyboard */,
@@ -151,7 +154,7 @@
 		83FBD7921C90859F0043F043 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				83FBD7931C9086760043F043 /* SaveFirebase.swift */,
+				8321B2C11C9E53DD00CE42F7 /* BaseService.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -296,13 +299,14 @@
 				29C9922C1C7FC40E009A5875 /* OvalLayer.swift in Sources */,
 				29C992321C7FC440009A5875 /* Colors.swift in Sources */,
 				29C9922B1C7FC40E009A5875 /* ArcLayer.swift in Sources */,
-				83FBD7941C9086760043F043 /* SaveFirebase.swift in Sources */,
 				29C992251C7FC3CF009A5875 /* HolderView.swift in Sources */,
 				29C992341C7FC933009A5875 /* MapViewController.swift in Sources */,
 				29C992141C7FBE44009A5875 /* ViewController.swift in Sources */,
 				29C992121C7FBE44009A5875 /* AppDelegate.swift in Sources */,
+				8321B2C21C9E53DD00CE42F7 /* BaseService.swift in Sources */,
 				29C9922D1C7FC40E009A5875 /* RectangleLayer.swift in Sources */,
 				29C9922E1C7FC40E009A5875 /* TriangleLayer.swift in Sources */,
+				8321B2C01C9DFA5F00CE42F7 /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

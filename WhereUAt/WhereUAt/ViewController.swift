@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class ViewController: UIViewController, HolderViewDelegate {
 
@@ -17,8 +18,13 @@ class ViewController: UIViewController, HolderViewDelegate {
         super.viewDidAppear(animated)
         addHolderView()
         
-        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "transition",
-            userInfo: nil, repeats: false)
+        if(FBSDKAccessToken.currentAccessToken() == nil){
+            NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "toLoginViewTransition",
+                userInfo: nil, repeats: false)
+        } else {
+            NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "toMapViewTransition",
+                userInfo: nil, repeats: false)
+        }
     }
 
     override func viewDidLoad() {
@@ -47,9 +53,15 @@ class ViewController: UIViewController, HolderViewDelegate {
     func backgroundLabel() {
     }
     
-    func transition(){
+    func toMapViewTransition(){
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let secondViewController = storyBoard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
         self.presentViewController(secondViewController, animated: true, completion: nil)
+    }
+    func toLoginViewTransition(){
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let loginViewController = storyBoard.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
+        self.presentViewController(loginViewController, animated: true, completion: nil)
+        
     }
 }
