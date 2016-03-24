@@ -30,8 +30,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
         let userRoot = root!.childByAppendingPath("user").childByAutoId()
         
+        fbFriendRequest()
         
-        //only friends using app is fetched
+    }
+    
+    //only friends using app is fetched
+    func fbFriendRequest() {
         var fbRequest = FBSDKGraphRequest(graphPath:"/me/friends", parameters: nil);
         fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
             if error == nil {
@@ -48,7 +52,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 print("Error Getting Friends \(error)");
             }
         }
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -63,9 +66,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         super.didReceiveMemoryWarning()
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
-    {
-        
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
         
         let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
@@ -85,17 +86,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let locationRoot = root!.childByAppendingPath("locations").childByAutoId()
 
         locationRoot.setValue(coordinates)
-        
-        
     }
     
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError)
-    {
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Errors: " + error.localizedDescription)
     }
     
-    @IBAction func LogoutButton(sender: AnyObject)
-    {
+    @IBAction func LogoutButton(sender: AnyObject) {
         let loginManager = FBSDKLoginManager()
         loginManager.logOut()
         
@@ -105,9 +102,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         appDelegate.window?.rootViewController = loginNav
-        
     }
-    
     
 }
 

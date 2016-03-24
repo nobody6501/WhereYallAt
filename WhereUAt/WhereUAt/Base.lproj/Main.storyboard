@@ -41,7 +41,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="mapView" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Aiy-rJ-1Xf">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="mapView" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Aiy-rJ-1Xf">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkj-wk-Vma">
@@ -55,7 +55,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="vkj-wk-Vma" secondAttribute="trailing" constant="70" id="2cc-Ux-sDz"/>
+                            <constraint firstItem="Aiy-rJ-1Xf" firstAttribute="leading" secondItem="wSm-a6-gD5" secondAttribute="leading" id="3dA-N3-Qv0"/>
                             <constraint firstItem="vkj-wk-Vma" firstAttribute="leading" secondItem="wSm-a6-gD5" secondAttribute="leadingMargin" constant="70" id="4dz-h2-qkw"/>
+                            <constraint firstItem="Aiy-rJ-1Xf" firstAttribute="centerX" secondItem="vkj-wk-Vma" secondAttribute="centerX" id="KiI-Ol-thr"/>
                             <constraint firstItem="RQ9-eZ-766" firstAttribute="top" secondItem="Aiy-rJ-1Xf" secondAttribute="bottom" id="WR3-6A-IBa"/>
                             <constraint firstItem="Aiy-rJ-1Xf" firstAttribute="top" secondItem="xX7-G2-Vok" secondAttribute="bottom" id="wdN-71-y1y"/>
                             <constraint firstItem="RQ9-eZ-766" firstAttribute="top" secondItem="vkj-wk-Vma" secondAttribute="bottom" constant="26" id="zXA-OU-qMp"/>
