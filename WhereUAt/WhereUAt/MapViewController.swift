@@ -37,7 +37,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
             if error == nil {
                 self.uid = result.valueForKey("id") as! String
-                userRoot.setValue(self.uid)
+                let currentUser = userRoot.childByAppendingPath(self.uid)
+                currentUser.setValue(self.uid)
             } else {
                 print("Error Getting Friends \(error)");
             }
@@ -58,7 +59,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     let personName = anItem["name"] as! String
                     let personID = anItem["id"] as! String
                     // do something with personName and personID
-                    let uidRoot = self.root!.childByAppendingPath("users").childByAppendingPath(self.uid).childByAppendingPath("friends").childByAutoId()
+                    let uidRoot = self.root!.childByAppendingPath("users").childByAppendingPath(self.uid).childByAppendingPath("friends").childByAppendingPath(personID)
                     var friendsInfo : [String: String] = ["Name": personName, "ID": personID]
                     uidRoot.setValue(friendsInfo)
                 }
