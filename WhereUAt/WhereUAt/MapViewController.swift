@@ -21,14 +21,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     let facebookLogin = FBSDKLoginManager()
+    var uid = ""
     
-    var root: Firebase?
-//    var geofire: GeoFire?
-    
+    let root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
+    var latitude: CLLocationDegrees!
+    var longitude: CLLocationDegrees!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
-        let userRoot = root!.childByAppendingPath("user").childByAutoId()
+//        root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
+        let userRoot = root!.childByAppendingPath("users")
+        
+        
+        var fbRequest = FBSDKGraphRequest(graphPath:"/me/", parameters: nil);
+        fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+            if error == nil {
+                self.uid = result.valueForKey("id") as! String
+                userRoot.setValue(self.uid)
+            } else {
+                print("Error Getting Friends \(error)");
+            }
+        }
         
         fbFriendRequest()
         
@@ -45,9 +58,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     let personName = anItem["name"] as! String
                     let personID = anItem["id"] as! String
                     // do something with personName and personID
-                    print("Friends ID are: \(personID)")
+                    let uidRoot = self.root!.childByAppendingPath("users").childByAppendingPath(self.uid).childByAppendingPath("friends").childByAutoId()
+                    var friendsInfo : [String: String] = ["Name": personName, "ID": personID]
+                    uidRoot.setValue(friendsInfo)
                 }
-                print("Friends are : \(result)")
             } else {
                 print("Error Getting Friends \(error)");
             }
@@ -76,14 +90,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.setRegion(region, animated: true)
         self.locationManager.stopUpdatingLocation()
         
-        var longitude = location!.coordinate.longitude
-        var latitude = location!.coordinate.latitude
+        longitude = location!.coordinate.longitude
+        latitude = location!.coordinate.latitude
         var coordinates : [String:CLLocationDegrees] = [
             "longitude": longitude,
             "latitude": latitude
         ]
         
-        let locationRoot = root!.childByAppendingPath("locations").childByAutoId()
+        let locationRoot = root!.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("locations")
 
         locationRoot.setValue(coordinates)
     }
