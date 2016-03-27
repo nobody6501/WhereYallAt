@@ -118,5 +118,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         appDelegate.window?.rootViewController = loginNav
     }
     
+    @IBAction func addPin(sender: UILongPressGestureRecognizer) {
+        
+        let location = sender.locationInView(self.mapView)
+        
+        let locCord = self.mapView.convertPoint(location, toCoordinateFromView: self.mapView)
+        
+        let annotation = MKPointAnnotation()
+        
+        annotation.coordinate = locCord
+        annotation.title = "Meet Here!"
+        
+        self.mapView.removeAnnotations(mapView.annotations)
+        self.mapView.addAnnotation(annotation)
+        
+    }
+    
 }
 
