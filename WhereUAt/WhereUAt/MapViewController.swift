@@ -20,24 +20,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     let locationManager = CLLocationManager()
-    let facebookLogin = FBSDKLoginManager()
-    var uid = ""
-    
     let root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
+    let facebookLogin = FBSDKLoginManager()
+    
+    var uid = ""
+    var destination: MKMapItem = MKMapItem()
     var latitude: CLLocationDegrees!
     var longitude: CLLocationDegrees!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
         let userRoot = root!.childByAppendingPath("users")
-        
-        
+                
         var fbRequest = FBSDKGraphRequest(graphPath:"/me/", parameters: nil);
         fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
             if error == nil {
                 self.uid = result.valueForKey("id") as! String
-                userRoot.setValue(self.uid)
+                let currentUser = userRoot.childByAppendingPath(self.uid)
+                currentUser.setValue(self.uid)
             } else {
                 print("Error Getting Friends \(error)");
             }
@@ -58,7 +58,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                     let personName = anItem["name"] as! String
                     let personID = anItem["id"] as! String
                     // do something with personName and personID
-                    let uidRoot = self.root!.childByAppendingPath("users").childByAppendingPath(self.uid).childByAppendingPath("friends").childByAutoId()
+                    let uidRoot = self.root!.childByAppendingPath("users").childByAppendingPath(self.uid).childByAppendingPath("friends").childByAppendingPath(personID)
                     var friendsInfo : [String: String] = ["Name": personName, "ID": personID]
                     uidRoot.setValue(friendsInfo)
                 }
@@ -116,6 +116,61 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         appDelegate.window?.rootViewController = loginNav
+    }
+    
+    @IBAction func addPin(sender: UILongPressGestureRecognizer) {
+        
+        let location = sender.locationInView(self.mapView)
+        
+        let locCord = self.mapView.convertPoint(location, toCoordinateFromView: self.mapView)
+        
+        let annotation = MKPointAnnotation()
+        
+        annotation.coordinate = locCord
+        annotation.title = "Meet Here!"
+        
+        let placeMark = MKPlacemark(coordinate: locCord, addressDictionary: nil)
+        
+        destination = MKMapItem(placemark: placeMark)
+        
+        self.mapView.removeAnnotations(mapView.annotations)
+        self.mapView.addAnnotation(annotation)
+
+        showDirections()
+        
+    }
+    
+    func showDirections() {
+        let request = MKDirectionsRequest()
+        request.source = MKMapItem.mapItemForCurrentLocation()
+        request.destination = destination
+        request.requestsAlternateRoutes = false
+        
+        let directions = MKDirections(request: request)
+        
+        directions.calculateDirectionsWithCompletionHandler{ response, error in
+            guard let response = response else {
+                print("Error \(error)")
+                return
+            }
+            
+            var overlays = self.mapView.overlays
+            self.mapView.removeOverlays(overlays)
+            
+            for route in response.routes as! [MKRoute] {
+                self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.AboveRoads)
+            }
+            
+        }
+        
+    }
+    
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        let draw = MKPolylineRenderer(overlay: overlay)
+        draw.strokeColor = UIColor.purpleColor()
+        draw.lineWidth = 3.0
+        
+        return draw
     }
     
 }

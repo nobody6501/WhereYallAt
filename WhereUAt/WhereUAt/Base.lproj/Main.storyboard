@@ -43,6 +43,11 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="mapView" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Aiy-rJ-1Xf">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outlet property="delegate" destination="fOS-Tc-hIw" id="Pkg-45-NjL"/>
+                                    <outletCollection property="gestureRecognizers" destination="Gc5-Tx-Vq1" appends="YES" id="s4E-5b-XKG"/>
+                                </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkj-wk-Vma">
                                 <rect key="frame" x="91" y="506" width="139" height="23"/>
@@ -70,6 +75,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f7r-wh-nOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="Gc5-Tx-Vq1">
+                    <connections>
+                        <action selector="addPin:" destination="fOS-Tc-hIw" id="u2B-ij-3L0"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-3830" y="-67"/>
         </scene>
