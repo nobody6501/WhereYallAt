@@ -31,9 +31,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let userRoot = root!.childByAppendingPath("users")
-        
-        
-        
+                
         var fbRequest = FBSDKGraphRequest(graphPath:"/me/", parameters: nil);
         fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
             if error == nil {
@@ -137,7 +135,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         self.mapView.removeAnnotations(mapView.annotations)
         self.mapView.addAnnotation(annotation)
-        self.mapView.removeOverlay(mapView.overlays)
+
         showDirections()
         
     }
@@ -156,11 +154,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 return
             }
             
-                var overlays:[MKOverlay] = self.mapView.overlays
+            var overlays = self.mapView.overlays
+            self.mapView.removeOverlays(overlays)
             
-                for route in response.routes as! [MKRoute] {
-                    self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.AboveRoads)
-                }
+            for route in response.routes as! [MKRoute] {
+                self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.AboveRoads)
+            }
             
         }
         
