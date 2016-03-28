@@ -44,6 +44,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
         
         fbFriendRequest()
+        getAllUsersID()
         
     }
     
@@ -172,6 +173,13 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         return draw
     }
+    
+    func getAllUsersID() {
+        root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
+            print(snapshot.key)})
+        
+    }
+
     
 }
 
