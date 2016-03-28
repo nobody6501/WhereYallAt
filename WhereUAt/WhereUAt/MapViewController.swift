@@ -20,17 +20,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     
     let locationManager = CLLocationManager()
-    let facebookLogin = FBSDKLoginManager()
-    var uid = ""
-    
     let root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
+    let facebookLogin = FBSDKLoginManager()
+    
+    var uid = ""
+    var destination: MKMapItem = MKMapItem()
     var latitude: CLLocationDegrees!
     var longitude: CLLocationDegrees!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
         let userRoot = root!.childByAppendingPath("users")
+        
         
         
         var fbRequest = FBSDKGraphRequest(graphPath:"/me/", parameters: nil);
@@ -130,9 +131,47 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         annotation.coordinate = locCord
         annotation.title = "Meet Here!"
         
+        let placeMark = MKPlacemark(coordinate: locCord, addressDictionary: nil)
+        
+        destination = MKMapItem(placemark: placeMark)
+        
         self.mapView.removeAnnotations(mapView.annotations)
         self.mapView.addAnnotation(annotation)
+        self.mapView.removeOverlay(mapView.overlays)
+        showDirections()
         
+    }
+    
+    func showDirections() {
+        let request = MKDirectionsRequest()
+        request.source = MKMapItem.mapItemForCurrentLocation()
+        request.destination = destination
+        request.requestsAlternateRoutes = false
+        
+        let directions = MKDirections(request: request)
+        
+        directions.calculateDirectionsWithCompletionHandler{ response, error in
+            guard let response = response else {
+                print("Error \(error)")
+                return
+            }
+            
+                var overlays:[MKOverlay] = self.mapView.overlays
+            
+                for route in response.routes as! [MKRoute] {
+                    self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.AboveRoads)
+                }
+            
+        }
+        
+    }
+    
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        let draw = MKPolylineRenderer(overlay: overlay)
+        draw.strokeColor = UIColor.purpleColor()
+        draw.lineWidth = 3.0
+        
+        return draw
     }
     
 }
