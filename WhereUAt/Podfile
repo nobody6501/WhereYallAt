@@ -1,0 +1,12 @@
+
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+target 'WhereUAt' do
+pod 'Firebase', '>= 2.5.0'
+pod 'GeoFire', '>= 1.1'
+pod ‘FBSDKLoginKit’
+pod ‘FBSDKShareKit’
+end
+
