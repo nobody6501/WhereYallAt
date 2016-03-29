@@ -87,7 +87,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-7182" y="-71"/>
+            <point key="canvasLocation" x="-6402" y="-215"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="c7E-hy-I1N">
@@ -101,34 +101,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncE-u6-0bj" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="72" y="369" width="478" height="211"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoginScreenTop" translatesAutoresizingMaskIntoConstraints="NO" id="ZwF-Sx-kQw">
                                 <rect key="frame" x="20" y="28" width="560" height="305"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="305" id="DyM-mr-Orb"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncE-u6-0bj" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="76" y="419" width="449" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="ECj-kd-KGE"/>
+                                    <constraint firstAttribute="width" constant="449" id="fMl-Vi-0cl"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.37480727159999999" green="0.55823761930000004" blue="0.88239182689999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ZwF-Sx-kQw" firstAttribute="leading" secondItem="a2L-EY-o7d" secondAttribute="leadingMargin" id="GBh-cC-DzR"/>
                             <constraint firstItem="ZwF-Sx-kQw" firstAttribute="top" secondItem="foN-8l-MaH" secondAttribute="bottom" constant="8" id="Qm9-dD-rOI"/>
                             <constraint firstItem="ZwF-Sx-kQw" firstAttribute="trailing" secondItem="a2L-EY-o7d" secondAttribute="trailingMargin" id="Rwj-yo-wyJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ncE-u6-0bj" secondAttribute="trailing" constant="30" id="S8I-1v-YK4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ncE-u6-0bj" secondAttribute="trailing" constant="55" id="S8I-1v-YK4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ncE-u6-0bj" secondAttribute="trailing" constant="321" id="UFo-Qu-Xq5"/>
                             <constraint firstItem="ncE-u6-0bj" firstAttribute="top" secondItem="ZwF-Sx-kQw" secondAttribute="bottom" constant="36" id="UGn-a2-lfh"/>
-                            <constraint firstItem="ZjH-7C-Jmd" firstAttribute="top" secondItem="ncE-u6-0bj" secondAttribute="bottom" constant="20" id="W4M-Ag-9pO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ncE-u6-0bj" secondAttribute="trailing" constant="30" id="bZR-2Z-ydB"/>
+                            <constraint firstItem="ZjH-7C-Jmd" firstAttribute="top" secondItem="ncE-u6-0bj" secondAttribute="bottom" constant="138" id="W4M-Ag-9pO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ncE-u6-0bj" secondAttribute="trailing" constant="55" id="bZR-2Z-ydB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ncE-u6-0bj" secondAttribute="trailing" constant="321" id="bkH-XZ-iXU"/>
                             <constraint firstItem="ZjH-7C-Jmd" firstAttribute="top" secondItem="ncE-u6-0bj" secondAttribute="bottom" constant="30" id="cw4-4d-shh"/>
-                            <constraint firstItem="ncE-u6-0bj" firstAttribute="leading" secondItem="a2L-EY-o7d" secondAttribute="leadingMargin" constant="52" id="eRI-ww-KOH"/>
-                            <constraint firstItem="ncE-u6-0bj" firstAttribute="top" secondItem="ZwF-Sx-kQw" secondAttribute="bottom" constant="36" id="lSh-aQ-BbL"/>
-                            <constraint firstItem="ZjH-7C-Jmd" firstAttribute="top" secondItem="ncE-u6-0bj" secondAttribute="bottom" constant="20" id="vpp-6a-S0t"/>
+                            <constraint firstItem="ncE-u6-0bj" firstAttribute="leading" secondItem="a2L-EY-o7d" secondAttribute="leadingMargin" constant="56" id="eRI-ww-KOH"/>
+                            <constraint firstItem="ZjH-7C-Jmd" firstAttribute="top" secondItem="ncE-u6-0bj" secondAttribute="bottom" constant="138" id="h6Z-QT-Hci"/>
+                            <constraint firstItem="ncE-u6-0bj" firstAttribute="top" secondItem="ZwF-Sx-kQw" secondAttribute="bottom" constant="86" id="lSh-aQ-BbL"/>
+                            <constraint firstItem="ZjH-7C-Jmd" firstAttribute="top" secondItem="ncE-u6-0bj" secondAttribute="bottom" constant="138" id="vpp-6a-S0t"/>
                             <constraint firstItem="ZwF-Sx-kQw" firstAttribute="top" secondItem="foN-8l-MaH" secondAttribute="bottom" constant="8" id="zDq-cb-Z7F"/>
                         </constraints>
                         <variation key="default">
@@ -148,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Jc-DV-7Ro" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6315" y="-71"/>
+            <point key="canvasLocation" x="-7221" y="-215"/>
         </scene>
     </scenes>
     <resources>
