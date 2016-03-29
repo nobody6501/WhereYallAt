@@ -182,22 +182,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         return draw
     }
     
-    func getAllUsersID() {
-        
-        let testID = "768394153262588"
-        root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
-            if (testID == snapshot.key) {
-                
-                print(snapshot.key)
-            }
-            
-        
-        })
-    }
+//    func getAllUsersID() {
+//        
+//        let testID = "768394153262588"
+//        root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
+//            if (testID == snapshot.key) {
+//                
+//                print(snapshot.key)
+//            }
+//            
+//        
+//        })
+//    }
     
     func getFriendUID() {
-        
-        var hasLocation: Bool = false
         
         root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("friends").observeEventType(.ChildAdded, withBlock: { myFriendsUID in
             
@@ -220,34 +218,53 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                             print("longitude is : \(self.friendLong)")
 
                         }
-//                        
-//                            let friendsCoord = CLLocationCoordinate2DMake(self.friendLat , self.friendLong)
-//                            // Drop a pin
-//                            let dropPin = MKPointAnnotation()
-//                            dropPin.coordinate = friendsCoord
-//                            dropPin.title = "TEST"
-//                            self.mapView.addAnnotation(dropPin)
                         
+                        if((self.friendLong) != nil && (self.friendLat != nil)) {
+                            self.dropFriendsPin(self.friendLat, long: self.friendLong)
+                        }
                         
                     })
+                    
 //                    print(snapshot.key)
                 }
                 
                 
+                
             })
-            
-            
         })
     }
     
-//    func friendsLocation () {
+    func dropFriendsPin (lat: CLLocationDegrees, long: CLLocationDegrees) {
+        let friendsCoord = CLLocationCoordinate2DMake(lat,long)
+        
+        let annotation = MKPointAnnotation()
+        
+        annotation.coordinate = friendsCoord
+        annotation.title = "TEST FRIEND!"
+        annotation.pinColor = UIColor.greenColor()
+        let placeMark = MKPlacemark(coordinate: friendsCoord, addressDictionary: nil)
+        
+        destination = MKMapItem(placemark: placeMark)
+        
+        self.mapView.addAnnotation(annotation)
+        
+//        showDirections()
+        
+    }
+    
+//    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
 //        
-//        let friendsCoord = CLLocationCoordinate2DMake(,)
-//        // Drop a pin
-//        let dropPin = MKPointAnnotation()
-//        dropPin.coordinate = friendsCoord
-//        dropPin.title =
-//        mapView.addAnnotation(dropPin)
+//        if (annotation.isKindOfClass(MKUserLocation)){
+//            return nil
+//        }
+//        var myPin = mapView.dequeueReusableAnnotationViewWithIdentifier("MyIdentifier") as? MKPinAnnotationView
+//        if myPin != nil {
+//            return myPin
+//        }
+//        
+//        myPin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "MyIdentifier")
+//        myPin?.pinColor = .Green
+//        return myPin
 //    }
 
     @IBOutlet weak var switchButton: UISwitch!
