@@ -56,19 +56,28 @@
                                     <action selector="LogoutButton:" destination="fOS-Tc-hIw" eventType="touchUpInside" id="iFc-qW-tnK"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GmE-ta-g09">
+                                <rect key="frame" x="20" y="550" width="51" height="31"/>
+                                <connections>
+                                    <action selector="ShowLocationAction:" destination="fOS-Tc-hIw" eventType="valueChanged" id="5TC-Ox-xqG"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Aiy-rJ-1Xf" firstAttribute="top" secondItem="wSm-a6-gD5" secondAttribute="topMargin" id="9y1-IV-dov"/>
                             <constraint firstItem="Aiy-rJ-1Xf" firstAttribute="leading" secondItem="wSm-a6-gD5" secondAttribute="leadingMargin" constant="-20" id="FzU-G9-H15"/>
                             <constraint firstItem="vkj-wk-Vma" firstAttribute="trailing" secondItem="wSm-a6-gD5" secondAttribute="trailingMargin" id="OR2-dG-tZL"/>
+                            <constraint firstItem="GmE-ta-g09" firstAttribute="leading" secondItem="wSm-a6-gD5" secondAttribute="leadingMargin" id="RG9-Ky-ZGC"/>
                             <constraint firstItem="vkj-wk-Vma" firstAttribute="top" secondItem="Aiy-rJ-1Xf" secondAttribute="bottom" constant="8" id="awZ-rf-vMQ"/>
+                            <constraint firstItem="RQ9-eZ-766" firstAttribute="top" secondItem="GmE-ta-g09" secondAttribute="bottom" constant="19" id="mlf-cW-O6e"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Aiy-rJ-1Xf" secondAttribute="trailing" constant="-20" id="qSx-3R-4CS"/>
                             <constraint firstItem="RQ9-eZ-766" firstAttribute="top" secondItem="vkj-wk-Vma" secondAttribute="bottom" constant="20" id="x9w-eN-EWC"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="Aiy-rJ-1Xf" id="UfE-pX-RLn"/>
+                        <outlet property="switchButton" destination="GmE-ta-g09" id="jtI-Dv-NSv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f7r-wh-nOH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -92,8 +101,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncE-u6-0bj" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="72" y="369" width="187" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncE-u6-0bj" customClass="FBSDKLoginButton">
+                                <rect key="frame" x="72" y="369" width="478" height="211"/>
                                 <state key="normal" title="Button">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>

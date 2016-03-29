@@ -173,5 +173,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         return draw
     }
     
+    @IBOutlet weak var switchButton: UISwitch!
+    @IBAction func ShowLocationAction(sender: AnyObject) {
+        if switchButton.on
+        {
+            self.locationManager.delegate = self
+            self.locationManager.requestWhenInUseAuthorization()
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            self.locationManager.startUpdatingLocation()
+            self.mapView.showsUserLocation = true
+        }
+        else
+        {
+            self.locationManager.stopUpdatingLocation()
+            self.mapView.showsUserLocation = false
+        }
+    }
+    
+    
 }
 
