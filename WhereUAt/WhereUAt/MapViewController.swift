@@ -30,22 +30,26 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        fbCurrentUserID()
+        fbFriendRequest()
+        
+//        getAllUsersID()
+//        getFriendUID()
+    }
+    
+    func fbCurrentUserID() {
         let userRoot = root!.childByAppendingPath("users")
-                
         var fbRequest = FBSDKGraphRequest(graphPath:"/me/", parameters: nil);
         fbRequest.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
             if error == nil {
                 self.uid = result.valueForKey("id") as! String
                 let currentUser = userRoot.childByAppendingPath(self.uid)
                 currentUser.setValue(self.uid)
+                
             } else {
                 print("Error Getting Friends \(error)");
             }
         }
-        
-        fbFriendRequest()
-        getAllUsersID()
-        
     }
     
     //only friends using app is fetched
@@ -75,6 +79,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
+        
+        getFriendUID()
     }
     
     override func didReceiveMemoryWarning() {
@@ -175,10 +181,35 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func getAllUsersID() {
-        root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
-            print(snapshot.key)})
         
+        let testID = "768394153262588"
+        root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
+            if (testID == snapshot.key) {
+                
+                print(snapshot.key)
+            }
+            
+        
+        })
     }
+    
+    func getFriendUID() {
+        root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("friends").observeEventType(.ChildAdded, withBlock: { snapshot in
+            print(snapshot.key)
+            print("friendIDs")
+            
+        })
+    }
+    
+//    func friendsLocation () {
+//        
+//        let friendsCoord = CLLocationCoordinate2DMake(,)
+//        // Drop a pin
+//        let dropPin = MKPointAnnotation()
+//        dropPin.coordinate = friendsCoord
+//        dropPin.title =
+//        mapView.addAnnotation(dropPin)
+//    }
 
     
 }
