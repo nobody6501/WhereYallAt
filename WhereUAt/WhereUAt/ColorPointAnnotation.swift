@@ -17,27 +17,5 @@ class ColorPointAnnotation: MKPointAnnotation {
         super.init()
     }
     
-    
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        if annotation is MKUserLocation {
-            return nil
-        }
         
-        let reuseId = "pin"
-        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
-        if pinView == nil {
-            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            
-            let colorPointAnnotation = annotation as! ColorPointAnnotation
-            pinView?.pinTintColor = colorPointAnnotation.pinColor
-        }
-        else {
-            pinView?.annotation = annotation
-        }
-        
-        return pinView
-    }
-
-    
-    
 }

@@ -29,6 +29,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var longitude: CLLocationDegrees!
     var friendLat: CLLocationDegrees!
     var friendLong: CLLocationDegrees!
+    var isDestination: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -129,11 +130,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBAction func addPin(sender: UILongPressGestureRecognizer) {
         
+        isDestination = true
         let location = sender.locationInView(self.mapView)
         
         let locCord = self.mapView.convertPoint(location, toCoordinateFromView: self.mapView)
         
-        let annotation = MKPointAnnotation()
+        let annotation = ColorPointAnnotation(pinColor: UIColor.redColor())
         
         annotation.coordinate = locCord
         annotation.title = "Meet Here!"
@@ -208,13 +210,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                         
                         if(locationValues.key == "latitude") {
                             self.friendLat = locationValues.value as! CLLocationDegrees
-//                            self.latitude = friendLat
                             print("latitude is : \(self.friendLat)")
                             
                         }
                         if (locationValues.key == "longitude"){
                             self.friendLong = locationValues.value as! CLLocationDegrees
-//                            self.longitude = friendLong
                             print("longitude is : \(self.friendLong)")
 
                         }
@@ -225,7 +225,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                         
                     })
                     
-//                    print(snapshot.key)
                 }
                 
                 
@@ -237,11 +236,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func dropFriendsPin (lat: CLLocationDegrees, long: CLLocationDegrees) {
         let friendsCoord = CLLocationCoordinate2DMake(lat,long)
         
-        let annotation = MKPointAnnotation()
+//        let annotation = MKPointAnnotation()
+        
+        let annotation = ColorPointAnnotation(pinColor: UIColor.greenColor())
         
         annotation.coordinate = friendsCoord
         annotation.title = "TEST FRIEND!"
-        annotation.pinColor = UIColor.greenColor()
         let placeMark = MKPlacemark(coordinate: friendsCoord, addressDictionary: nil)
         
         destination = MKMapItem(placemark: placeMark)
@@ -252,20 +252,27 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
     }
     
-//    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-//        
-//        if (annotation.isKindOfClass(MKUserLocation)){
-//            return nil
-//        }
-//        var myPin = mapView.dequeueReusableAnnotationViewWithIdentifier("MyIdentifier") as? MKPinAnnotationView
-//        if myPin != nil {
-//            return myPin
-//        }
-//        
-//        myPin = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "MyIdentifier")
-//        myPin?.pinColor = .Green
-//        return myPin
-//    }
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            
+            let colorPointAnnotation = annotation as! ColorPointAnnotation
+            pinView?.pinTintColor = colorPointAnnotation.pinColor
+        }
+        if isDestination {
+            let colorPointAnnotation = annotation as! ColorPointAnnotation
+            pinView?.pinTintColor = colorPointAnnotation.pinColor        }
+        
+        isDestination = false
+        return pinView
+    }
+
 
     @IBOutlet weak var switchButton: UISwitch!
     @IBAction func ShowLocationAction(sender: AnyObject) {
