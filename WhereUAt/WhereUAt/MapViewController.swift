@@ -27,6 +27,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     var destination: MKMapItem = MKMapItem()
     var latitude: CLLocationDegrees!
     var longitude: CLLocationDegrees!
+    var friendLat: CLLocationDegrees!
+    var friendLong: CLLocationDegrees!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -194,9 +196,46 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func getFriendUID() {
-        root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("friends").observeEventType(.ChildAdded, withBlock: { snapshot in
-            print(snapshot.key)
-            print("friendIDs")
+        
+        var hasLocation: Bool = false
+        
+        root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("friends").observeEventType(.ChildAdded, withBlock: { myFriendsUID in
+            
+            self.root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
+                if (myFriendsUID.key == snapshot.key) {
+                    
+                    self.root.childByAppendingPath("users").childByAppendingPath(myFriendsUID.key).childByAppendingPath("locations").observeEventType(.ChildAdded, withBlock: { locationValues in
+                    
+                        print(locationValues.value)
+                        
+                        if(locationValues.key == "latitude") {
+                            self.friendLat = locationValues.value as! CLLocationDegrees
+//                            self.latitude = friendLat
+                            print("latitude is : \(self.friendLat)")
+                            
+                        }
+                        if (locationValues.key == "longitude"){
+                            self.friendLong = locationValues.value as! CLLocationDegrees
+//                            self.longitude = friendLong
+                            print("longitude is : \(self.friendLong)")
+
+                        }
+//                        
+//                            let friendsCoord = CLLocationCoordinate2DMake(self.friendLat , self.friendLong)
+//                            // Drop a pin
+//                            let dropPin = MKPointAnnotation()
+//                            dropPin.coordinate = friendsCoord
+//                            dropPin.title = "TEST"
+//                            self.mapView.addAnnotation(dropPin)
+                        
+                        
+                    })
+//                    print(snapshot.key)
+                }
+                
+                
+            })
+            
             
         })
     }
@@ -211,6 +250,23 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 //        mapView.addAnnotation(dropPin)
 //    }
 
+    @IBOutlet weak var switchButton: UISwitch!
+    @IBAction func ShowLocationAction(sender: AnyObject) {
+        if switchButton.on
+        {
+            self.locationManager.delegate = self
+            self.locationManager.requestWhenInUseAuthorization()
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            self.locationManager.startUpdatingLocation()
+            self.mapView.showsUserLocation = true
+        }
+        else
+        {
+            self.locationManager.stopUpdatingLocation()
+            self.mapView.showsUserLocation = false
+        }
+    }
+    
     
 }
 
