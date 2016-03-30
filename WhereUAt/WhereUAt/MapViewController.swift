@@ -22,6 +22,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     let root = Firebase(url:"https://amber-torch-9345.firebaseio.com/")
     let facebookLogin = FBSDKLoginManager()
+    let destinationPin = ColorPointAnnotation(pinColor: UIColor.redColor())
     
     var uid = ""
     var destination: MKMapItem = MKMapItem()
@@ -36,8 +37,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         fbCurrentUserID()
         fbFriendRequest()
         
-//        getAllUsersID()
-//        getFriendUID()
     }
     
     func fbCurrentUserID() {
@@ -83,7 +82,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
         
-        getFriendUID()
+        retrieveFriendsLocation()
     }
     
     override func didReceiveMemoryWarning() {
@@ -129,31 +128,47 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func addPin(sender: UILongPressGestureRecognizer) {
-        
         isDestination = true
-        let location = sender.locationInView(self.mapView)
         
+        let location = sender.locationInView(self.mapView)
         let locCord = self.mapView.convertPoint(location, toCoordinateFromView: self.mapView)
         
-        let annotation = ColorPointAnnotation(pinColor: UIColor.redColor())
+        destinationPin.coordinate = locCord
+        destinationPin.title = "Meet Here!"
         
-        annotation.coordinate = locCord
-        annotation.title = "Meet Here!"
+        let destinationMark = MKPlacemark(coordinate: locCord, addressDictionary: nil)
         
-        let placeMark = MKPlacemark(coordinate: locCord, addressDictionary: nil)
+        destination = MKMapItem(placemark: destinationMark)
+        
+        self.mapView.removeAnnotation(destinationPin)
+        self.mapView.addAnnotation(destinationPin)
+
+        showCurrentUserDirections()
+        retrieveFriendsLocation()
+
+    }
+    
+    func dropFriendsPin (lat: CLLocationDegrees, long: CLLocationDegrees) {
+        let friendsCoord = CLLocationCoordinate2DMake(lat,long)
+        
+        let annotation = ColorPointAnnotation(pinColor: UIColor.greenColor())
+        
+        annotation.coordinate = friendsCoord
+        annotation.title = "TEST FRIEND!"
+        let placeMark = MKPlacemark(coordinate: friendsCoord, addressDictionary: nil)
         
         destination = MKMapItem(placemark: placeMark)
-        
-        self.mapView.removeAnnotations(mapView.annotations)
         self.mapView.addAnnotation(annotation)
-
-        showDirections()
         
     }
     
-    func showDirections() {
+    func showFriendsToDestination(friendLat: CLLocationDegrees, friendLong: CLLocationDegrees) {
         let request = MKDirectionsRequest()
-        request.source = MKMapItem.mapItemForCurrentLocation()
+        
+        var friendMark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(friendLat, friendLong), addressDictionary: nil)
+        let source = MKMapItem(placemark: friendMark)
+    
+        request.source = source
         request.destination = destination
         request.requestsAlternateRoutes = false
         
@@ -171,85 +186,64 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             for route in response.routes as! [MKRoute] {
                 self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.AboveRoads)
             }
-            
         }
+    }
+    
+    func showCurrentUserDirections() {
+        let request = MKDirectionsRequest()
+        request.source = MKMapItem.mapItemForCurrentLocation()
+        request.destination = destination
+        request.requestsAlternateRoutes = false
         
+        let directions = MKDirections(request: request)
+        
+        directions.calculateDirectionsWithCompletionHandler{ response, error in
+            guard let response = response else {
+                print("Error \(error)")
+                return
+            }
+            var overlays = self.mapView.overlays
+            self.mapView.removeOverlays(overlays)
+            
+            for route in response.routes as! [MKRoute] {
+                self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.AboveRoads)
+            }
+        }
     }
     
     func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
         let draw = MKPolylineRenderer(overlay: overlay)
-        draw.strokeColor = UIColor.purpleColor()
+        draw.strokeColor = UIColor.blueColor()
         draw.lineWidth = 3.0
         
         return draw
     }
     
-//    func getAllUsersID() {
-//        
-//        let testID = "768394153262588"
-//        root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
-//            if (testID == snapshot.key) {
-//                
-//                print(snapshot.key)
-//            }
-//            
-//        
-//        })
-//    }
-    
-    func getFriendUID() {
-        
+    func retrieveFriendsLocation() {
         root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("friends").observeEventType(.ChildAdded, withBlock: { myFriendsUID in
             
             self.root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
                 if (myFriendsUID.key == snapshot.key) {
                     
                     self.root.childByAppendingPath("users").childByAppendingPath(myFriendsUID.key).childByAppendingPath("locations").observeEventType(.ChildAdded, withBlock: { locationValues in
-                    
-                        print(locationValues.value)
                         
                         if(locationValues.key == "latitude") {
                             self.friendLat = locationValues.value as! CLLocationDegrees
-                            print("latitude is : \(self.friendLat)")
                             
                         }
                         if (locationValues.key == "longitude"){
                             self.friendLong = locationValues.value as! CLLocationDegrees
-                            print("longitude is : \(self.friendLong)")
 
                         }
                         
                         if((self.friendLong) != nil && (self.friendLat != nil)) {
                             self.dropFriendsPin(self.friendLat, long: self.friendLong)
+                            self.showFriendsToDestination(self.friendLat, friendLong: self.friendLong)
                         }
-                        
                     })
-                    
                 }
-                
-                
-                
             })
         })
-    }
-    
-    func dropFriendsPin (lat: CLLocationDegrees, long: CLLocationDegrees) {
-        let friendsCoord = CLLocationCoordinate2DMake(lat,long)
-        
-//        let annotation = MKPointAnnotation()
-        
-        let annotation = ColorPointAnnotation(pinColor: UIColor.greenColor())
-        
-        annotation.coordinate = friendsCoord
-        annotation.title = "TEST FRIEND!"
-        let placeMark = MKPlacemark(coordinate: friendsCoord, addressDictionary: nil)
-        
-        destination = MKMapItem(placemark: placeMark)
-        
-        self.mapView.addAnnotation(annotation)
-        
-//        showDirections()
-        
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
