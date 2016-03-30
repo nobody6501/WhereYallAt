@@ -83,6 +83,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.showsUserLocation = true
         
         retrieveFriendsLocation()
+        var updateFriendsLocationTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "retrieveFriendsLocation", userInfo: nil, repeats: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -144,6 +145,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.addAnnotation(destinationPin)
 
         showCurrentUserDirections()
+        
         retrieveFriendsLocation()
 
     }
@@ -255,7 +257,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            
             let colorPointAnnotation = annotation as! ColorPointAnnotation
             pinView?.pinTintColor = colorPointAnnotation.pinColor
         }
