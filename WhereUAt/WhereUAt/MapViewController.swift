@@ -25,6 +25,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     let destinationPin = ColorPointAnnotation(pinColor: UIColor.redColor())
     
     var uid = ""
+    var updateFriendsLocationTimer: NSTimer = NSTimer()
     var destination: MKMapItem = MKMapItem()
     var latitude: CLLocationDegrees!
     var longitude: CLLocationDegrees!
@@ -83,7 +84,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.showsUserLocation = true
         
         retrieveFriendsLocation()
-        var updateFriendsLocationTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "retrieveFriendsLocation", userInfo: nil, repeats: true)
+        updateFriendsLocationTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "retrieveFriendsLocation", userInfo: nil, repeats: true)
     }
     
     override func didReceiveMemoryWarning() {
@@ -111,6 +112,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
         locationRoot.setValue(coordinates)
     }
+    
+//    func updateCurrentCoordinates() {
+//        
+//    }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Errors: " + error.localizedDescription)
@@ -145,8 +150,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.addAnnotation(destinationPin)
 
         showCurrentUserDirections()
-        
+        showFriendsToDestination(friendLat, friendLong: friendLong)
         retrieveFriendsLocation()
+        
 
     }
     
@@ -182,8 +188,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 return
             }
             
-            var overlays = self.mapView.overlays
-            self.mapView.removeOverlays(overlays)
+//            var overlays = self.mapView.overlays
+//            self.mapView.removeOverlays(overlays)
             
             for route in response.routes as! [MKRoute] {
                 self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.AboveRoads)
@@ -204,8 +210,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 print("Error \(error)")
                 return
             }
-            var overlays = self.mapView.overlays
-            self.mapView.removeOverlays(overlays)
+//            var overlays = self.mapView.overlays
+//            self.mapView.removeOverlays(overlays)
             
             for route in response.routes as! [MKRoute] {
                 self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.AboveRoads)
