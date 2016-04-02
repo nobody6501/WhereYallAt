@@ -26,13 +26,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     var uid = ""
     var updateFriendsLocationTimer: NSTimer = NSTimer()
+    var updateDestinationCheckerTimer: NSTimer = NSTimer()
     var destination: MKMapItem = MKMapItem()
     var latitude: CLLocationDegrees!
     var longitude: CLLocationDegrees!
     var friendLat: CLLocationDegrees!
     var friendLong: CLLocationDegrees!
-    var destLong: CLLocationDegrees!
-    var destLat: CLLocationDegrees!
+    var destLong: CLLocationDegrees = 0
+    var destLat: CLLocationDegrees = 0
     var isDestination: Bool = false
     var isFriendRoute: Bool = false
     var addedDestination: Bool = false
@@ -89,6 +90,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         
         retrieveFriendsLocation()
         updateFriendsLocationTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "retrieveFriendsLocation", userInfo: nil, repeats: true)
+        
+        checkHasDestination()
+        if(!addedDestination) {
+            updateDestinationCheckerTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "checkHasDestination", userInfo: nil, repeats: true)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -111,15 +117,18 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             "longitude": longitude,
             "latitude": latitude
         ]
+        var destinationLocation : [String:AnyObject] = [
+        "hasDestination": addedDestination,
+        "longitude": destLong,
+        "latitude": destLat
+        ]
         
         let locationRoot = root!.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("locations")
-
+        let destinationRoot = root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("Destination")
+        
         locationRoot.setValue(coordinates)
+        destinationRoot.setValue(destinationLocation)
     }
-    
-//    func updateCurrentCoordinates() {
-//        
-//    }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
         print("Errors: " + error.localizedDescription)
@@ -138,17 +147,19 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             
             destLong = locCord.longitude
             destLat = locCord.latitude
-            
-            
+            addedDestination = true
+
             //add to backend
-            var destinationLocation : [String:CLLocationDegrees] = [
+            var destinationLocation : [String:AnyObject] = [
+                "hasDestination": addedDestination,
                 "longitude": destLong,
                 "latitude": destLat
             ]
-            root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("Destination").setValue(destinationLocation)
+           
+            let destinationRoot = root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("Destination")
             
-            addedDestination = true
-            
+            destinationRoot.setValue(destinationLocation)
+        
             destinationPin.coordinate = locCord
             destinationPin.title = "Meet Here!"
             
@@ -246,6 +257,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func retrieveFriendsLocation() {
+        
         root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("friends").observeEventType(.ChildAdded, withBlock: { myFriendsUID in
             
             self.root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
@@ -272,18 +284,63 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         })
     }
     
-    //not done
+    
     func shareDestination() {
+        
         root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("friends").observeEventType(.ChildAdded, withBlock: { myFriendsUID in
             self.root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
                 if (myFriendsUID.key == snapshot.key) {
                     self.root.childByAppendingPath("users").childByAppendingPath(myFriendsUID.key).childByAppendingPath("destination").observeEventType(.ChildAdded, withBlock: { destinationValues in
-                    
+                        if(destinationValues.key == "latitude")
+                        {
+                            self.destLat = destinationValues.value as! CLLocationDegrees
+                        }
+                        if(destinationValues.key == "longitude") {
+                            self.destLong = destinationValues.value as! CLLocationDegrees
+                        }
+                        if(self.destLong != 0 && self.destLat != 0) {
+                            var overlays = self.mapView.overlays
+                            self.mapView.removeOverlays(overlays)
+                            
+                            self.destinationPin.coordinate = CLLocationCoordinate2DMake(self.destLat, self.destLong)
+                            self.destinationPin.title = "Meet Here!"
+                            
+                            let destinationMark = MKPlacemark(coordinate: self.destinationPin.coordinate, addressDictionary: nil)
+                            
+                            self.destination = MKMapItem(placemark: destinationMark)
+                            
+                            self.mapView.removeAnnotation(self.destinationPin)
+                            self.mapView.addAnnotation(self.destinationPin)
+                            
+                            self.showCurrentUserDirections()
+                            
+                            self.showFriendsToDestination(self.friendLat, friendLong: self.friendLong)
+                            self.retrieveFriendsLocation()
+                        }
                         
                     })
                 }
             })
         })
+    }
+    
+    func checkHasDestination() -> Bool! {
+        
+        root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("Destination").observeEventType(.ChildAdded, withBlock: { snapshot in
+            
+            if(snapshot.key == "hasDestination") {
+                self.addedDestination = snapshot.value as! Bool
+                
+                if(self.addedDestination) {
+                    self.updateDestinationCheckerTimer.invalidate()
+                    
+                    self.shareDestination()
+                    
+                }
+            }
+        })
+    
+        return addedDestination
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
