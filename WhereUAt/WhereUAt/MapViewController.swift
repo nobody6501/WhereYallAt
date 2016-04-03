@@ -136,6 +136,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     
     @IBAction func addPin(sender: UILongPressGestureRecognizer) {
+        isFriendRoute = false
         if(uiSwitch.on) {
             isDestination = true
             
@@ -200,6 +201,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     //route for friend to destination
     func showFriendsToDestination(friendLat: CLLocationDegrees, friendLong: CLLocationDegrees) {
+        isFriendRoute = true
         let request = MKDirectionsRequest()
         var friendMark = MKPlacemark(coordinate: CLLocationCoordinate2DMake(friendLat, friendLong), addressDictionary: nil)
         let source = MKMapItem(placemark: friendMark)
@@ -218,11 +220,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             
             for route in response.routes as! [MKRoute] {
                 self.mapView.addOverlay(route.polyline, level: MKOverlayLevel.AboveRoads)
+
             }
         }
+        isFriendRoute = false
     }
     
     func showCurrentUserDirections() {
+        isFriendRoute = false
         let request = MKDirectionsRequest()
         request.source = MKMapItem.mapItemForCurrentLocation()
         request.destination = destination
@@ -282,6 +287,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 }
             })
         })
+        isFriendRoute = false
     }
     
     
@@ -324,7 +330,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         })
     }
     
-    func checkHasDestination() -> Bool! {
+    func checkHasDestination() {
         
         root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("Destination").observeEventType(.ChildAdded, withBlock: { snapshot in
             
@@ -333,14 +339,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 
                 if(self.addedDestination) {
                     self.updateDestinationCheckerTimer.invalidate()
-                    
                     self.shareDestination()
-                    
                 }
             }
         })
-    
-        return addedDestination
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
