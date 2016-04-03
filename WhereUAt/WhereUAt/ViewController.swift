@@ -71,6 +71,7 @@ class ViewController: UIViewController, HolderViewDelegate {
         let secondViewController = storyBoard.instantiateViewControllerWithIdentifier("MapViewController") as! MapViewController
         self.presentViewController(secondViewController, animated: true, completion: nil)
     }
+    
     func toLoginViewTransition(){
         let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let loginViewController = storyBoard.instantiateViewControllerWithIdentifier("LoginViewController") as! LoginViewController
