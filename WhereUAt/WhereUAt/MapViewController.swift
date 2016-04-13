@@ -112,10 +112,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.setRegion(region, animated: true)
         self.locationManager.stopUpdatingLocation()
         
-//        longitude = location!.coordinate.longitude
-//        latitude = location!.coordinate.latitude
-        longitude = 30.2672
-        latitude = 97.7431
+        longitude = location!.coordinate.longitude
+        latitude = location!.coordinate.latitude
         
         var coordinates : [String:CLLocationDegrees] = [
             "longitude": longitude,
@@ -303,20 +301,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func shareDestination() {
         root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("friends").observeEventType(.ChildAdded, withBlock: { myFriendsUID in
             self.root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
-                
                 if (myFriendsUID.key == snapshot.key) {
                     
                     self.root.childByAppendingPath("users").childByAppendingPath(myFriendsUID.key).childByAppendingPath("Destination").observeEventType(.ChildAdded, withBlock: { destinationValues in
-                        
+                        print("dest root")
+                        print("\(destinationValues.value)")
+                        if(destinationValues.key == "longitude") {
+                            self.destLong = destinationValues.value as! CLLocationDegrees
+                        }
                         if(destinationValues.key == "latitude")
                         {
                             self.destLat = destinationValues.value as! CLLocationDegrees
                         }
-                        if(destinationValues.key == "longitude") {
-                            self.destLong = destinationValues.value as! CLLocationDegrees
-                        }
+                        
                         if(self.destLong != 0 && self.destLat != 0) {
-                            
                             var overlays = self.mapView.overlays
                             self.mapView.removeOverlays(overlays)
                             
@@ -324,7 +322,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                             self.destinationPin.title = "Meet Here!"
                             
                             let destinationMark = MKPlacemark(coordinate: self.destinationPin.coordinate, addressDictionary: nil)
-                            
                             self.destination = MKMapItem(placemark: destinationMark)
                             
                             self.mapView.removeAnnotation(self.destinationPin)
@@ -345,16 +342,37 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     //check if destination has been dropped
     //tested, it checks
     func checkHasDestination() {
-        root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("Destination").observeEventType(.ChildAdded, withBlock: { snapshot in
-            
-            if(snapshot.key == "hasDestination") {
-                self.addedDestination = snapshot.value as! Bool
-                if(self.addedDestination) {
-                    self.updateDestinationCheckerTimer.invalidate()
-                    self.shareDestination()
+//        root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("Destination").observeEventType(.ChildAdded, withBlock: { snapshot in
+//            
+//            if(snapshot.key == "hasDestination") {
+//                if(snapshot.value as! AnyObject as! NSObject == 0) {
+//                    self.addedDestination = snapshot.value as! Bool
+//                    if(self.addedDestination) {
+//                        print("destination added")
+//                        self.updateDestinationCheckerTimer.invalidate()
+//                        self.shareDestination()
+//                    }
+//                }
+//            }
+//        })
+        root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("friends").observeEventType(.ChildAdded, withBlock: { myFriendsUID in
+            self.root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
+                
+                if (myFriendsUID.key == snapshot.key) {
+                    
+                    self.root.childByAppendingPath("users").childByAppendingPath(myFriendsUID.key).childByAppendingPath("Destination").observeEventType(.ChildAdded, withBlock: { destinationValues in
+                        if(destinationValues.key == "hasDestination") {
+                            if(destinationValues.value as! AnyObject as! NSObject == 1) {
+                                self.updateDestinationCheckerTimer.invalidate()
+                                self.shareDestination()
+                            }
+                        }
+                        
+                    })
                 }
-            }
+            })
         })
+
     }
     
     // different annotation/pin colors
