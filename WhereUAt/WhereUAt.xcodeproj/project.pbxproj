@@ -228,7 +228,7 @@
 				TargetAttributes = {
 					29C9920D1C7FBE44009A5875 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 3RD757CXQ7;
+						DevelopmentTeam = L7H5BWRKJ8;
 					};
 				};
 			};
@@ -455,7 +455,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = WhereUAt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = WhereUAt.WhereUAt;
+				PRODUCT_BUNDLE_IDENTIFIER = WhereYallAt.WhereYallAt.UT.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WhereUAt/WhereUAt-Bridging-Header.h";
@@ -481,7 +481,7 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				INFOPLIST_FILE = WhereUAt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = WhereUAt.WhereUAt;
+				PRODUCT_BUNDLE_IDENTIFIER = WhereYallAt.WhereYallAt.UT.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WhereUAt/WhereUAt-Bridging-Header.h";
