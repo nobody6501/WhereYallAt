@@ -88,13 +88,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.startUpdatingLocation()
         self.mapView.showsUserLocation = true
-        
         retrieveFriendsLocation()
-        updateFriendsLocationTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "retrieveFriendsLocation", userInfo: nil, repeats: true)
+        updateFriendsLocationTimer = NSTimer.scheduledTimerWithTimeInterval(20, target: self, selector: "retrieveFriendsLocation", userInfo: nil, repeats: true)
         
         checkHasDestination()
         if(!addedDestination) {
-            updateDestinationCheckerTimer = NSTimer.scheduledTimerWithTimeInterval(30, target: self, selector: "checkHasDestination", userInfo: nil, repeats: true)
+            updateDestinationCheckerTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "checkHasDestination", userInfo: nil, repeats: true)
         }
     }
     
@@ -113,8 +112,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         self.mapView.setRegion(region, animated: true)
         self.locationManager.stopUpdatingLocation()
         
-        longitude = location!.coordinate.longitude
-        latitude = location!.coordinate.latitude
+//        longitude = location!.coordinate.longitude
+//        latitude = location!.coordinate.latitude
+        longitude = 30.2672
+        latitude = 97.7431
+        
         var coordinates : [String:CLLocationDegrees] = [
             "longitude": longitude,
             "latitude": latitude
@@ -152,6 +154,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             destLat = locCord.latitude
             addedDestination = true
 
+        
             //add to backend
             var destinationLocation : [String:AnyObject] = [
                 "hasDestination": addedDestination,
@@ -171,7 +174,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             destination = MKMapItem(placemark: destinationMark)
             
             self.mapView.removeAnnotation(destinationPin)
+            
             self.mapView.addAnnotation(destinationPin)
+            
+            destinationPin.title = "Meet Here!"
+
             
             showCurrentUserDirections()
             
@@ -296,8 +303,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func shareDestination() {
         root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("friends").observeEventType(.ChildAdded, withBlock: { myFriendsUID in
             self.root.childByAppendingPath("users").observeEventType(.ChildAdded, withBlock: { snapshot in
+                
                 if (myFriendsUID.key == snapshot.key) {
-                    self.root.childByAppendingPath("users").childByAppendingPath(myFriendsUID.key).childByAppendingPath("destination").observeEventType(.ChildAdded, withBlock: { destinationValues in
+                    
+                    self.root.childByAppendingPath("users").childByAppendingPath(myFriendsUID.key).childByAppendingPath("Destination").observeEventType(.ChildAdded, withBlock: { destinationValues in
+                        
                         if(destinationValues.key == "latitude")
                         {
                             self.destLat = destinationValues.value as! CLLocationDegrees
@@ -306,6 +316,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                             self.destLong = destinationValues.value as! CLLocationDegrees
                         }
                         if(self.destLong != 0 && self.destLat != 0) {
+                            
                             var overlays = self.mapView.overlays
                             self.mapView.removeOverlays(overlays)
                             
@@ -332,12 +343,12 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     //check if destination has been dropped
+    //tested, it checks
     func checkHasDestination() {
         root.childByAppendingPath("users").childByAppendingPath(uid).childByAppendingPath("Destination").observeEventType(.ChildAdded, withBlock: { snapshot in
             
             if(snapshot.key == "hasDestination") {
                 self.addedDestination = snapshot.value as! Bool
-                
                 if(self.addedDestination) {
                     self.updateDestinationCheckerTimer.invalidate()
                     self.shareDestination()
@@ -357,10 +368,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             let colorPointAnnotation = annotation as! ColorPointAnnotation
             pinView?.pinTintColor = colorPointAnnotation.pinColor
+            pinView?.canShowCallout = true
         }
         if isDestination {
             let colorPointAnnotation = annotation as! ColorPointAnnotation
-            pinView?.pinTintColor = colorPointAnnotation.pinColor        }
+            pinView?.pinTintColor = colorPointAnnotation.pinColor
+            pinView?.canShowCallout = true
+
+        }
         
         isDestination = false
         return pinView
