@@ -228,7 +228,7 @@
 				TargetAttributes = {
 					29C9920D1C7FBE44009A5875 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 3RD757CXQ7;
+						DevelopmentTeam = L7H5BWRKJ8;
 					};
 				};
 			};
@@ -442,6 +442,7 @@
 			baseConfigurationReference = 917BCC47A70A381AE8DAF944 /* Pods-WhereUAt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -468,6 +469,7 @@
 			baseConfigurationReference = 10337723BC5FE41206E02EAA /* Pods-WhereUAt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
