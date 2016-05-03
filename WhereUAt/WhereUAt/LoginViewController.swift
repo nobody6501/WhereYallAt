@@ -15,11 +15,16 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var loginButton: FBSDKLoginButton!
     
+    let prefs = NSUserDefaults.standardUserDefaults()
+    var uid = ""
+    var name = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        print("not logged in yet")
-        
-        loginButton.readPermissions = ["public_profile", "email", "user_friends"]
+       
+        if (FBSDKAccessToken.currentAccessToken() == nil) {
+            loginButton.readPermissions = ["public_profile", "email", "user_friends"]
+        }
         
         loginButton.delegate = self
         
@@ -34,9 +39,10 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         
         if (error == nil) {
+//            print("Login complete")
+            fetchProfile()
+//            self.performSegueWithIdentifier("toMap", sender: self)
             
-            print("Login complete")
-            self.performSegueWithIdentifier("toMap", sender: self)
         }
         else {
             print(error.localizedDescription)
@@ -44,6 +50,21 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+        loginManager.logOut()
         print("User logged out")
+    }
+    
+    func fetchProfile() {
+        let parameters = ["fields": "email, first_name, last_name, picture.type(large)"]
+        FBSDKGraphRequest(graphPath: "me", parameters: parameters).startWithCompletionHandler({ (connection, user, requestError) -> Void in
+            
+            if requestError != nil {
+                print(requestError)
+                return
+            }
+            self.performSegueWithIdentifier("toMap", sender: self)
+
+        })
     }
 }

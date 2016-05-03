@@ -22,6 +22,7 @@
 		7C95B2651CA1FB8C00C8BDEF /* 32SettingsWheel.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C95B2621CA1FB8C00C8BDEF /* 32SettingsWheel.png */; };
 		7C95B2661CA1FB8C00C8BDEF /* AppIconNoBGLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C95B2631CA1FB8C00C8BDEF /* AppIconNoBGLarge.png */; };
 		7C95B2671CA1FB8C00C8BDEF /* FriendsIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C95B2641CA1FB8C00C8BDEF /* FriendsIcon.png */; };
+		830FF2FE1CC7E0C8007DC2A4 /* UserDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830FF2FD1CC7E0C8007DC2A4 /* UserDetail.swift */; };
 		8321B06A1C9116C300CE42F7 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8321B0691C9116C300CE42F7 /* libicucore.tbd */; };
 		8321B06C1C9116CF00CE42F7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8321B06B1C9116CF00CE42F7 /* SystemConfiguration.framework */; };
 		8321B06E1C9116D700CE42F7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8321B06D1C9116D700CE42F7 /* CFNetwork.framework */; };
@@ -54,6 +55,7 @@
 		7C95B2621CA1FB8C00C8BDEF /* 32SettingsWheel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 32SettingsWheel.png; path = ../Images/32SettingsWheel.png; sourceTree = "<group>"; };
 		7C95B2631CA1FB8C00C8BDEF /* AppIconNoBGLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = AppIconNoBGLarge.png; path = ../Images/AppIconNoBGLarge.png; sourceTree = "<group>"; };
 		7C95B2641CA1FB8C00C8BDEF /* FriendsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = FriendsIcon.png; path = ../Images/FriendsIcon.png; sourceTree = "<group>"; };
+		830FF2FD1CC7E0C8007DC2A4 /* UserDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetail.swift; sourceTree = "<group>"; };
 		8321B0641C9113D100CE42F7 /* WhereUAt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhereUAt-Bridging-Header.h"; sourceTree = "<group>"; };
 		8321B0691C9116C300CE42F7 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		8321B06B1C9116CF00CE42F7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -113,6 +115,7 @@
 				836B81771CAAE6E80005BED2 /* ColorPointAnnotation.swift */,
 				29C992131C7FBE44009A5875 /* ViewController.swift */,
 				29C992151C7FBE44009A5875 /* Main.storyboard */,
+				830FF2FD1CC7E0C8007DC2A4 /* UserDetail.swift */,
 				8321B2BF1C9DFA5F00CE42F7 /* LoginViewController.swift */,
 				29C992331C7FC933009A5875 /* MapViewController.swift */,
 				29C992181C7FBE44009A5875 /* Assets.xcassets */,
@@ -326,6 +329,7 @@
 				29C992251C7FC3CF009A5875 /* HolderView.swift in Sources */,
 				29C992341C7FC933009A5875 /* MapViewController.swift in Sources */,
 				29C992141C7FBE44009A5875 /* ViewController.swift in Sources */,
+				830FF2FE1CC7E0C8007DC2A4 /* UserDetail.swift in Sources */,
 				29C992121C7FBE44009A5875 /* AppDelegate.swift in Sources */,
 				8321B2C21C9E53DD00CE42F7 /* BaseService.swift in Sources */,
 				29C9922D1C7FC40E009A5875 /* RectangleLayer.swift in Sources */,

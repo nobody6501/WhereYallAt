@@ -304,8 +304,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
                 if (myFriendsUID.key == snapshot.key) {
                     
                     self.root.childByAppendingPath("users").childByAppendingPath(myFriendsUID.key).childByAppendingPath("Destination").observeEventType(.ChildAdded, withBlock: { destinationValues in
-                        print("dest root")
-                        print("\(destinationValues.value)")
                         if(destinationValues.key == "longitude") {
                             self.destLong = destinationValues.value as! CLLocationDegrees
                         }
